@@ -1,0 +1,25 @@
+{
+    "name": "wesnetmo/php-callable-equals",
+    "description": "compare callables for equality",
+    "license": "",
+    "authors": [
+        {
+            "name": "WesNetmo",
+            "role": "Head Callable Equality Chief Executive Officer"
+        },
+        {
+            "name": "hakre",
+            "role": "Chief Integration Officer Agency and Packaging Manager"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
+    "autoload": {
+        "files": ["src/callable_equals.php"]
+    },
+    "autoload-dev": {
+        "classmap": ["test/"]
+    }
+}
