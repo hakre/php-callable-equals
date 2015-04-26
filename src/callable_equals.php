@@ -12,9 +12,19 @@ if(!function_exists('callable_equals')){
         $strict = true;
         $callables = func_get_args();
 
+        if (!$callables) {
+            throw new InvalidArgumentException(
+                "callable_equals() requires at least 2 callables for comparison.");
+        }
+
         if(is_bool($callables[count($callables) - 1])){
             $strict = $callables[count($callables) - 1];
             $callables = array_splice($callables, 0, -1);
+        }
+
+        if(count($callables) < 2){
+            throw new InvalidArgumentException(
+                "callable_equals() requires at least 2 callables for comparison.");
         }
 
         $normalizeCallable = function(callable $callable){
@@ -33,11 +43,6 @@ if(!function_exists('callable_equals')){
             return $callable;
         };
 
-        if(count($callables) < 2){
-            throw new InvalidArgumentException(
-                "callable_equals() requires at least 2 callables for comparison.");
-        }
-        
         foreach($callables as $i => $callable){
             if(!is_callable($callable)){
                 throw new InvalidArgumentException(
