@@ -39,5 +39,8 @@ class UnitTest extends PHPUnit_Framework_TestCase
         } catch (InvalidArgumentException $e){
             $this->addToAssertionCount(1);
         }
+
+        // okay also with three
+        $this->assertFalse(callable_equals('callable_equals', 'trim', true));
     }
 }

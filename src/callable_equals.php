@@ -17,9 +17,8 @@ if(!function_exists('callable_equals')){
                 "callable_equals() requires at least 2 callables for comparison.");
         }
 
-        if(is_bool($callables[count($callables) - 1])){
-            $strict = $callables[count($callables) - 1];
-            $callables = array_splice($callables, 0, -1);
+        if(is_bool(end($callables))) {
+            $strict = array_pop($callables);
         }
 
         if(count($callables) < 2){
