@@ -19,7 +19,7 @@ if(!function_exists('callable_equals')){
 
         if (!$callables) {
             throw new InvalidArgumentException(
-                "callable_equals() requires at least 2 callables for comparison.");
+                "callable_equals() requires at least 2 callables for comparison");
         }
 
         if(is_bool(end($callables))) {
@@ -28,13 +28,15 @@ if(!function_exists('callable_equals')){
 
         if(count($callables) < 2){
             throw new InvalidArgumentException(
-                "callable_equals() requires at least 2 callables for comparison.");
+                "callable_equals() requires at least 2 callables for comparison");
         }
 
         foreach($callables as $i => $callable){
             if(!is_callable($callable)){
                 throw new InvalidArgumentException(
-                    "Argument " . ($i + 1) . " is not a callable.");
+                    sprintf(
+                        "Argument %d passed to callable_equals() must be callable, %s given"
+                        , $i + 1, gettype($callable)));
             }else{
                 $callables[$i] = callable_normalize($callable);
             }

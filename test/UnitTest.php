@@ -54,4 +54,25 @@ class UnitTest extends PHPUnit_Framework_TestCase
         require __DIR__ . '/../src/callable_equals.php';
         $this->assertEmpty(error_get_last());
     }
+
+    /**
+     * @test
+     */
+    public function invalidCallables()
+    {
+        $object = new EmptyIterator();
+        $valid = [$object, 'valid'];
+        $this->assertTrue(callable_equals($valid, $valid));
+
+        /** @link file:///data/callable-error-message.php */
+        $expected = 'Argument 1 passed to callable_equals() must be callable, string given';
+
+        try {
+            callable_equals('isset', $valid);
+            $this->fail('an expected exception has not been thrown');
+        } catch (InvalidArgumentException $e) {
+            $this->addToAssertionCount(1);
+            $this->assertEquals($expected, $e->getMessage());
+        }
+    }
 }
