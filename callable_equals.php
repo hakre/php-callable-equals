@@ -34,14 +34,14 @@ if(!function_exists('callable_equals')){
         };
 
         if(count($callables) < 2){
-            trigger_error("callable_equals() requires at least 2 callables for comparison.", E_USER_WARNING);
-            return null;
+            throw new InvalidArgumentException(
+                "callable_equals() requires at least 2 callables for comparison.");
         }
         
         foreach($callables as $i => $callable){
             if(!is_callable($callable)){
-                trigger_error("Argument " . ($i + 1) . " is not a callable.", E_USER_WARNING);
-                return null;
+                throw new InvalidArgumentException(
+                    "Argument " . ($i + 1) . " is not a callable.");
             }else{
                 $callables[$i] = $normalizeCallable($callable);
             }
