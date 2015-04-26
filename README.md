@@ -1,5 +1,7 @@
 # php callable_equals()
 
+I haven't tested it. Don't expect it to work.
+
 ```php
 var_dump(callable_equals(
     ['Foo', 'bar'],
