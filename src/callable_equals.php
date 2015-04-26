@@ -1,6 +1,11 @@
 <?php
+/*
+ * This file is part of php callable_equals()
+ */
 
 if(!function_exists('callable_equals')){
+    require_once __DIR__ . '/callable_normalize.php';
+
     /**
      * Tests two or more callables for equality.
      *
@@ -26,28 +31,12 @@ if(!function_exists('callable_equals')){
                 "callable_equals() requires at least 2 callables for comparison.");
         }
 
-        $normalizeCallable = function(callable $callable){
-            if(is_string($callable)){
-                $callable = strtolower($callable);
-                $pieces = explode("::", $callable);
-                if(count($pieces) == 2){
-                    return [$pieces[0], $pieces[1]];
-                }
-                return $callable;
-            }
-            if(is_string($callable[0])){
-                $callable[0] = strtolower($callable[0]);
-            }
-            $callable[1] = strtolower($callable[1]);
-            return $callable;
-        };
-
         foreach($callables as $i => $callable){
             if(!is_callable($callable)){
                 throw new InvalidArgumentException(
                     "Argument " . ($i + 1) . " is not a callable.");
             }else{
-                $callables[$i] = $normalizeCallable($callable);
+                $callables[$i] = callable_normalize($callable);
             }
         }
 
