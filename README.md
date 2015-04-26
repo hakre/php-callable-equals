@@ -1,0 +1,1 @@
+# php-callable-equals
