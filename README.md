@@ -1,6 +1,6 @@
 # php callable_equals()
 
-```
+```php
 var_dump(callable_equals(
     ['Foo', 'bar'],
     'foo::BAR'
