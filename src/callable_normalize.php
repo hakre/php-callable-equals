@@ -10,6 +10,11 @@
  */
 function callable_normalize(callable $callable)
 {
+    // closure and object calling magic ($callable->__invoke())
+    if (is_object($callable)) {
+        return $callable;
+    }
+
     if (is_string($callable)) {
         $callable = strtolower($callable);
         $pieces   = explode("::", $callable);

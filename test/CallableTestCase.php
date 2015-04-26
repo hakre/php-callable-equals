@@ -9,6 +9,15 @@
 abstract class CallableTestCase extends PHPUnit_Framework_TestCase
 {
     /**
+     * @see IntegrationTest::normalization
+     * @see IntegrationTest::equality
+     */
+    public function provideCallables()
+    {
+        return $this->provideParameterFromArray(CallableStubs::create()->getValidCallbacks());
+    }
+
+    /**
      * @param array $array
      *
      * @return array
