@@ -43,4 +43,15 @@ class UnitTest extends PHPUnit_Framework_TestCase
         // okay also with three
         $this->assertFalse(callable_equals('callable_equals', 'trim', true));
     }
+
+    /**
+     * @test
+     */
+    public function requireExisting()
+    {
+        $this->assertTrue(function_exists('callable_equals'));
+        $this->assertEmpty(error_get_last());
+        require __DIR__ . '/../src/callable_equals.php';
+        $this->assertEmpty(error_get_last());
+    }
 }
