@@ -18,6 +18,14 @@ abstract class CallableTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @see IntegrationTest::invalidArgumentExceptionOnCatchableFatalError
+     */
+    public function provideInvalidCallables()
+    {
+        return $this->provideParameterFromArray(CallableStubs::create()->getInvalidCallbacks());
+    }
+
+    /**
      * @param array $array
      *
      * @return array

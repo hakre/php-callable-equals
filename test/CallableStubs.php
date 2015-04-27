@@ -3,6 +3,8 @@
  * This file is part of php callable_equals()
  */
 
+if (!function_exists('function_stub')) {
+
 /**
  * Class CallableStubs
  */
@@ -28,11 +30,26 @@ class CallableStubs
             [new Exception('hello'), 'getMessage'],
             'function_stub',
             function () {},
+            [new CallableStub, 'dynamic'],
+            ['StaticCallableStub', 'dynamic'],
             'StaticCallableStub::dynamic',
             new InvokableStub(),
             'ClassStub::method',
             ['ClassStub', 'method'],
             [new ClassStub, '__construct'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getInvalidCallbacks() {
+        return [
+            null,
+            0,
+            42,
+            new EmptyIterator(),
+            'ClassStub::noMethod',
         ];
     }
 }
@@ -56,6 +73,13 @@ class ClassStub
     }
 }
 
+class CallableStub
+{
+    function __call($name, $arguments)
+    {
+    }
+}
+
 class StaticCallableStub
 {
     public static function __callStatic($name, $arguments)
@@ -69,4 +93,6 @@ class InvokableStub
     function __invoke()
     {
     }
+}
+
 }

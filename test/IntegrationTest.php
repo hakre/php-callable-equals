@@ -30,4 +30,26 @@ class IntegrationTest extends CallableTestCase
         $result = callable_equals($callable, $callable, true);
         $this->assertTrue($result);
     }
+
+    /**
+     * @test
+     * @dataProvider provideInvalidCallables
+     */
+    public function invalidityEquality($callable)
+    {
+        $exception = null;
+
+        try {
+            callable_equals($callable, $callable, false);
+        } catch (InvalidArgumentException $exception) {
+            $message = $exception->getMessage();
+            $this->assertStringStartsWith('Argument 1 passed to callable_equals() must be callable, ', $message);
+        } catch (Exception $exception) {
+            // PHP < 7 branch
+        } catch (BaseException $exception) {
+            // PHP 7 branch
+        }
+
+        $this->assertInstanceOf('InvalidArgumentException', $exception);
+    }
 }
