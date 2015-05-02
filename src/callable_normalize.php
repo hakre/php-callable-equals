@@ -6,7 +6,7 @@
 /**
  * @param callable $callable
  *
- * @return array|callable|string
+ * @return callable if string (also in an array) in a normalized fashion. objects are already normalized.
  */
 function callable_normalize(callable $callable)
 {
@@ -24,9 +24,11 @@ function callable_normalize(callable $callable)
 
         return $callable;
     }
+
     if (is_string($callable[0])) {
         $callable[0] = strtolower($callable[0]);
     }
+
     $callable[1] = strtolower($callable[1]);
 
     return $callable;
