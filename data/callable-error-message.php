@@ -16,3 +16,9 @@ $test('isset');
 restore_error_handler();
 
 var_dump($error_message);
+
+
+$subject = 'Argument 1 passed to CatchableFatalErrorTest::__invoke() must be an instance of callable, stdClass given';
+$pattern = '~^Argument 1 passed to CatchableFatalErrorTest::(?:{closure}|__invoke)\\(\\) must be (?:an instance of )?callable, (?:object|stdClass) given~';
+echo $subject, "\n";
+var_dump(preg_match($pattern, $subject));
